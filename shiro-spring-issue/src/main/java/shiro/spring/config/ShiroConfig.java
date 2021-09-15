@@ -6,7 +6,9 @@ import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import shiro.spring.dao.po.mapper.UserMapper;
 import shiro.spring.oauth.OAuth2Realm;
+import shiro.spring.service.factorybean.NormalServiceFactoryBean;
 
 @Configuration
 public class ShiroConfig {
@@ -22,6 +24,11 @@ public class ShiroConfig {
         ShiroFilterFactoryBean factoryBean = new ShiroFilterFactoryBean();
         factoryBean.setSecurityManager(securityManager);
         return factoryBean;
+    }
+
+    @Bean
+    public NormalServiceFactoryBean normalService(UserMapper userMapper) {
+        return new NormalServiceFactoryBean(userMapper);
     }
 
     @Bean
